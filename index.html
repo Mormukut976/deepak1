@@ -10,28 +10,25 @@
     <style>
         :root {
             --bg: #f8fafc;
-            --surface: rgba(255, 255, 255, 0.90);
+            --surface: rgba(255, 255, 255, 0.92);
             --surface-card: #ffffff;
             --input-bg: #f8fafc;
             --border: #e2e8f0;
             --border-focus: #6366f1;
             --primary: #4f46e5;
-            --primary-hover: #4338ca;
             --grad: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
             --grad-subtle: linear-gradient(135deg, rgba(79,70,229,0.06) 0%, rgba(124,58,237,0.06) 100%);
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --text-light: #94a3b8;
             --success: #16a34a;
             --warn: #d97706;
             --error: #dc2626;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
             --shadow-lg: 0 25px 50px -12px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
             --radius-xl: 24px;
             --radius-lg: 16px;
             --radius-md: 12px;
-            --radius-sm: 8px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
@@ -51,7 +48,7 @@
             padding: 30px 16px;
         }
 
-        /* ── AUTH CONTAINER ── */
+        /* LOGIN SCREEN */
         .login-card {
             max-width: 440px;
             width: 100%;
@@ -79,33 +76,11 @@
             box-shadow: 0 12px 24px rgba(79, 70, 229, 0.25);
         }
 
-        .login-card h2 {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 6px;
-            letter-spacing: -0.02em;
-        }
+        .login-card h2 { font-size: 24px; font-weight: 800; color: var(--text-main); margin-bottom: 6px; }
+        .login-card p { color: var(--text-muted); font-size: 14px; margin-bottom: 28px; }
 
-        .login-card p {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 28px;
-        }
-
-        .login-field {
-            text-align: left;
-            margin-bottom: 18px;
-        }
-
-        .login-field label {
-            display: block;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 6px;
-        }
-
+        .login-field { text-align: left; margin-bottom: 18px; }
+        .login-field label { display: block; font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 6px; }
         .login-field input {
             width: 100%;
             padding: 13px 16px;
@@ -117,7 +92,6 @@
             outline: none;
             transition: all 0.2s;
         }
-
         .login-field input:focus {
             border-color: var(--border-focus);
             background: #fff;
@@ -138,21 +112,10 @@
             transition: all 0.2s;
             margin-top: 8px;
         }
+        .btn-login:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(79, 70, 229, 0.35); }
+        .login-error { color: var(--error); font-size: 13px; font-weight: 600; margin-top: 14px; min-height: 18px; }
 
-        .btn-login:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 12px 28px rgba(79, 70, 229, 0.35);
-        }
-
-        .login-error {
-            color: var(--error);
-            font-size: 13px;
-            font-weight: 600;
-            margin-top: 14px;
-            min-height: 18px;
-        }
-
-        /* ── DASHBOARD ── */
+        /* DASHBOARD */
         .studio-container {
             display: none;
             max-width: 1060px;
@@ -171,7 +134,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* HEADER */
         .header {
             display: flex;
             justify-content: space-between;
@@ -197,18 +159,8 @@
             box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
         }
 
-        .brand-text h1 {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            color: var(--text-main);
-        }
-
-        .brand-text p {
-            color: var(--text-muted);
-            font-size: 13px;
-            font-weight: 500;
-        }
+        .brand-text h1 { font-size: 24px; font-weight: 800; color: var(--text-main); }
+        .brand-text p { color: var(--text-muted); font-size: 13px; font-weight: 500; }
 
         .user-pill {
             display: flex;
@@ -249,13 +201,8 @@
             cursor: pointer;
             transition: all 0.2s;
         }
+        .btn-logout:hover { background: #fee2e2; color: var(--error); }
 
-        .btn-logout:hover {
-            background: #fee2e2;
-            color: var(--error);
-        }
-
-        /* TABS */
         .tabs {
             display: flex;
             background: #f1f5f9;
@@ -288,18 +235,10 @@
             box-shadow: var(--shadow-sm);
         }
 
-        /* FORM */
         .form-group { margin-bottom: 22px; }
         .form-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 
-        label {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        label { font-size: 13px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
 
         .magic-btn {
             background: rgba(79, 70, 229, 0.08);
@@ -312,11 +251,7 @@
             cursor: pointer;
             transition: 0.2s;
         }
-
-        .magic-btn:hover {
-            background: var(--primary);
-            color: #fff;
-        }
+        .magic-btn:hover { background: var(--primary); color: #fff; }
 
         textarea, select {
             width: 100%;
@@ -352,7 +287,6 @@
             transition: all 0.2s;
             box-shadow: 0 1px 2px rgba(0,0,0,0.03);
         }
-
         .chip:hover {
             background: var(--grad-subtle);
             border-color: var(--primary);
@@ -360,7 +294,7 @@
             transform: translateY(-1px);
         }
 
-        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
 
         .btn-generate {
             width: 100%;
@@ -379,15 +313,9 @@
             justify-content: center;
             gap: 10px;
         }
-
-        .btn-generate:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 35px rgba(79, 70, 229, 0.35);
-        }
-
+        .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 14px 35px rgba(79, 70, 229, 0.35); }
         .btn-generate:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-        /* OUTPUT BOX */
         .output-card {
             margin-top: 32px;
             background: #ffffff;
@@ -436,13 +364,7 @@
             text-decoration: none;
             box-shadow: var(--shadow-sm);
         }
-
-        .action-btn:hover {
-            background: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-        }
-
+        .action-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
         .action-btn.primary-act {
             background: var(--grad);
             color: #fff;
@@ -459,70 +381,22 @@
             align-items: center;
             gap: 10px;
         }
-
         .placeholder-icon { font-size: 38px; opacity: 0.6; }
 
         .progress-wrap { width: 100%; max-width: 420px; margin-top: 14px; }
-        .progress-bar-bg {
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 999px;
-            overflow: hidden;
-        }
-        .progress-bar-fill {
-            height: 100%;
-            background: var(--grad);
-            border-radius: 999px;
-            width: 0%;
-            transition: width 0.4s ease;
-        }
-        .progress-label {
-            font-size: 13px;
-            color: var(--text-muted);
-            text-align: center;
-            margin-top: 8px;
-            font-weight: 600;
-        }
+        .progress-bar-bg { height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: var(--grad); border-radius: 999px; width: 0%; transition: width 0.4s ease; }
+        .progress-label { font-size: 13px; color: var(--text-muted); text-align: center; margin-top: 8px; font-weight: 600; }
 
-        .status-bar {
-            margin-top: 16px;
-            text-align: center;
-            font-size: 14px;
-            font-weight: 700;
-            min-height: 22px;
-        }
+        .status-bar { margin-top: 16px; text-align: center; font-size: 14px; font-weight: 700; min-height: 22px; }
         .status-bar.loading { color: var(--warn); }
         .status-bar.success { color: var(--success); }
         .status-bar.error { color: var(--error); }
 
-        /* RECENT HISTORY */
-        .history-section {
-            margin-top: 36px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border);
-        }
-
-        .history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-        }
-
-        .history-header h3 {
-            font-size: 13px;
-            font-weight: 800;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .history-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 12px;
-        }
-
+        .history-section { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border); }
+        .history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .history-header h3 { font-size: 13px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+        .history-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; }
         .history-item {
             position: relative;
             border-radius: var(--radius-md);
@@ -534,19 +408,8 @@
             transition: all 0.2s;
             box-shadow: var(--shadow-sm);
         }
-
-        .history-item:hover {
-            transform: scale(1.05);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-md);
-        }
-
-        .history-item img, .history-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
+        .history-item:hover { transform: scale(1.05); border-color: var(--primary); box-shadow: var(--shadow-md); }
+        .history-item img, .history-item video { width: 100%; height: 100%; object-fit: cover; }
         .history-tag {
             position: absolute;
             bottom: 4px;
@@ -560,7 +423,7 @@
             border-radius: 4px;
         }
 
-        @media (max-width: 680px) {
+        @media (max-width: 768px) {
             .studio-container { padding: 24px 18px; }
             .options-grid { grid-template-columns: 1fr; }
             .brand-text h1 { font-size: 20px; }
@@ -569,7 +432,7 @@
 </head>
 <body>
 
-    <!-- ── 1. LOGIN SCREEN ── -->
+    <!-- 1. LOGIN SCREEN -->
     <div class="login-card" id="loginCard">
         <div class="login-icon">✦</div>
         <h2>Agnes AI Studio</h2>
@@ -589,7 +452,7 @@
         </form>
     </div>
 
-    <!-- ── 2. STUDIO DASHBOARD ── -->
+    <!-- 2. STUDIO DASHBOARD -->
     <div class="studio-container" id="studioDashboard">
         <div class="header">
             <div class="brand">
@@ -646,7 +509,15 @@
             <div class="form-group" id="videoResGroup" style="display:none;">
                 <label for="videoResolution">📐 Video Resolution</label>
                 <select id="videoResolution">
-                    <option value="720p">720p HD (High-Speed Cinematic ~35s)</option>
+                    <option value="720p">720p HD (High-Speed Cinematic)</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="videoDurationGroup" style="display:none;">
+                <label for="videoDuration">⏱️ Video Duration</label>
+                <select id="videoDuration">
+                    <option value="5" selected>5 Seconds (Standard · Crisp Motion)</option>
+                    <option value="10">10 Seconds (Extended Mode)</option>
                 </select>
             </div>
 
@@ -685,9 +556,6 @@
     </div>
 
     <script>
-        // =============================================
-        // CREDENTIALS & CONFIG
-        // =============================================
         const AUTH_USER = "Deepak";
         const AUTH_PASS = "Deepak8890@";
 
@@ -697,7 +565,6 @@
         let currentMode = 'image';
         const historyItems = [];
 
-        // DOM Refs
         const loginCard       = document.getElementById('loginCard');
         const studioDashboard = document.getElementById('studioDashboard');
         const loginError      = document.getElementById('loginError');
@@ -714,15 +581,14 @@
         const tabVideo        = document.getElementById('tabVideo');
         const aspectRatioGroup= document.getElementById('aspectRatioGroup');
         const videoResGroup   = document.getElementById('videoResGroup');
+        const videoDurationGroup = document.getElementById('videoDurationGroup');
+        const videoDuration   = document.getElementById('videoDuration');
         const aspectRatio     = document.getElementById('aspectRatio');
         const qualityPreset   = document.getElementById('qualityPreset');
         const historySection  = document.getElementById('historySection');
         const historyGrid     = document.getElementById('historyGrid');
         const historyCount    = document.getElementById('historyCount');
 
-        // =============================================
-        // AUTHENTICATION LOGIC
-        // =============================================
         function checkSession() {
             const isAuth = sessionStorage.getItem('agnes_auth');
             const savedUser = sessionStorage.getItem('agnes_user');
@@ -767,9 +633,6 @@
 
         checkSession();
 
-        // =============================================
-        // MODE SWITCHER
-        // =============================================
         function setMode(mode) {
             currentMode = mode;
             if (mode === 'image') {
@@ -777,19 +640,18 @@
                 tabVideo.classList.remove('active');
                 aspectRatioGroup.style.display = 'block';
                 videoResGroup.style.display = 'none';
+                videoDurationGroup.style.display = 'none';
                 btnText.textContent = '🚀 Generate HD Image (2s)';
             } else {
                 tabVideo.classList.add('active');
                 tabImage.classList.remove('active');
                 aspectRatioGroup.style.display = 'none';
                 videoResGroup.style.display = 'block';
+                videoDurationGroup.style.display = 'block';
                 btnText.textContent = '🎬 Generate 720p Video (~35s)';
             }
         }
 
-        // =============================================
-        // PROMPT CHIPS & POLISHER
-        // =============================================
         function addTag(tag) {
             const current = promptInput.value.trim();
             promptInput.value = current ? current + ', ' + tag : tag;
@@ -813,9 +675,6 @@
             statusBar.className = 'status-bar ' + type;
         }
 
-        // =============================================
-        // BLOB DIRECT DOWNLOAD (Forces file save)
-        // =============================================
         async function downloadDirect(url, type) {
             setStatus('⏳ Preparing download...', 'loading');
             try {
@@ -841,9 +700,6 @@
             setStatus('📋 Prompt copied to clipboard!', 'success');
         }
 
-        // =============================================
-        // RENDER RESULT & HISTORY
-        // =============================================
         function showResult(url, type, prompt) {
             outputCard.innerHTML = '';
             const container = document.createElement('div');
@@ -929,9 +785,6 @@
             `;
         }
 
-        // =============================================
-        // API CALLS
-        // =============================================
         async function generateImage(prompt) {
             const size = aspectRatio.value;
             const style = qualityPreset.value;
@@ -958,6 +811,7 @@
         async function generateVideo(prompt) {
             const style = qualityPreset.value;
             const fullPrompt = prompt + style;
+            const dur = parseInt(videoDuration.value) || 5;
 
             const submitResp = await fetch(`${BASE_URL}/video/generations`, {
                 method: 'POST',
@@ -969,7 +823,7 @@
                     model: "cogvideox-flash",
                     prompt: fullPrompt,
                     resolution: "720p",
-                    duration: 5
+                    duration: dur
                 })
             });
             if (!submitResp.ok) throw new Error(`Video Submit Error: ${await submitResp.text()}`);
@@ -1007,9 +861,6 @@
             throw new Error('Video generation timed out after 3 minutes');
         }
 
-        // =============================================
-        // MAIN ACTION
-        // =============================================
         async function handleGenerate() {
             const prompt = promptInput.value.trim();
             if (!prompt) return setStatus('❗ Please enter a prompt description', 'error');
