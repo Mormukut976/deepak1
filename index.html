@@ -3,137 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✦ Agnes AI Creative Studio – Enterprise Edition</title>
+    <title>✦ Agnes AI Studio – Next-Gen Creative Suite</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f8fafc;
-            --surface: rgba(255, 255, 255, 0.92);
-            --surface-card: #ffffff;
-            --input-bg: #f8fafc;
-            --border: #e2e8f0;
-            --border-focus: #6366f1;
-            --primary: #4f46e5;
-            --grad: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
-            --grad-subtle: linear-gradient(135deg, rgba(79,70,229,0.06) 0%, rgba(124,58,237,0.06) 100%);
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --success: #16a34a;
-            --warn: #d97706;
-            --error: #dc2626;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
-            --shadow-lg: 0 25px 50px -12px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
-            --radius-xl: 24px;
-            --radius-lg: 16px;
-            --radius-md: 12px;
+            --bg-body: #070913;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --bg-card-hover: rgba(30, 41, 59, 0.85);
+            --bg-input: #0b1120;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(99, 102, 241, 0.4);
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.35);
+            --gradient-main: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+            --gradient-card: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --success: #22c55e;
+            --warn: #f59e0b;
+            --error: #ef4444;
+            --radius-2xl: 28px;
+            --radius-xl: 20px;
+            --radius-lg: 14px;
+            --radius-md: 10px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
 
         body {
-            background-color: var(--bg);
+            background-color: var(--bg-body);
             background-image: 
-                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(219, 39, 119, 0.06) 0%, transparent 40%),
-                radial-gradient(circle at 50% 30%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 90% 20%, rgba(236, 72, 153, 0.14) 0%, transparent 45%),
+                radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
             background-attachment: fixed;
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 30px 16px;
+            align-items: flex-start;
+            padding: 30px 16px 60px;
         }
 
-        /* LOGIN SCREEN */
+        /* ── 1. LOGIN SCREEN ── */
         .login-card {
             max-width: 440px;
             width: 100%;
-            background: var(--surface);
-            backdrop-filter: blur(20px);
-            border-radius: var(--radius-xl);
+            background: var(--bg-card);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border-radius: var(--radius-2xl);
             padding: 44px 36px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border);
             text-align: center;
-            animation: fadeIn 0.4s ease-out;
+            animation: riseUp 0.5s ease-out;
+            margin: auto 0;
         }
 
         .login-icon {
-            width: 60px;
-            height: 60px;
+            width: 64px;
+            height: 64px;
             margin: 0 auto 20px;
-            background: var(--grad);
-            border-radius: 18px;
+            background: var(--gradient-main);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 30px;
             color: #fff;
-            box-shadow: 0 12px 24px rgba(79, 70, 229, 0.25);
+            box-shadow: 0 12px 30px var(--primary-glow);
         }
 
-        .login-card h2 { font-size: 24px; font-weight: 800; color: var(--text-main); margin-bottom: 6px; }
-        .login-card p { color: var(--text-muted); font-size: 14px; margin-bottom: 28px; }
+        .login-card h2 {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
 
-        .login-field { text-align: left; margin-bottom: 18px; }
-        .login-field label { display: block; font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 6px; }
+        .login-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .login-field {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .login-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #cbd5e1;
+            margin-bottom: 6px;
+        }
+
         .login-field input {
             width: 100%;
-            padding: 13px 16px;
-            background: var(--input-bg);
+            padding: 14px 16px;
+            background: var(--bg-input);
             border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            color: var(--text-main);
+            border-radius: var(--radius-lg);
+            color: #fff;
             font-size: 15px;
             outline: none;
             transition: all 0.2s;
         }
+
         .login-field input:focus {
-            border-color: var(--border-focus);
-            background: #fff;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+            background: #0e1526;
         }
 
         .btn-login {
             width: 100%;
-            padding: 14px;
-            background: var(--grad);
+            padding: 15px;
+            background: var(--gradient-main);
             border: none;
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-lg);
             color: #fff;
             font-size: 15px;
-            font-weight: 700;
+            font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+            box-shadow: 0 10px 25px var(--primary-glow);
             transition: all 0.2s;
             margin-top: 8px;
         }
-        .btn-login:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(79, 70, 229, 0.35); }
-        .login-error { color: var(--error); font-size: 13px; font-weight: 600; margin-top: 14px; min-height: 18px; }
 
-        /* DASHBOARD */
-        .studio-container {
-            display: none;
-            max-width: 1060px;
-            width: 100%;
-            background: var(--surface);
-            backdrop-filter: blur(28px);
-            border-radius: var(--radius-xl);
-            padding: 40px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(226, 232, 240, 0.9);
-            animation: fadeIn 0.4s ease-out;
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 35px rgba(99, 102, 241, 0.5);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
+        .login-error {
+            color: var(--error);
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 14px;
+            min-height: 18px;
+        }
+
+        /* ── 2. DASHBOARD MAIN CONTAINER ── */
+        .studio-container {
+            display: none;
+            max-width: 1100px;
+            width: 100%;
+            background: var(--bg-card);
+            backdrop-filter: blur(36px);
+            -webkit-backdrop-filter: blur(36px);
+            border-radius: var(--radius-2xl);
+            padding: 36px 40px;
+            box-shadow: 0 32px 90px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border);
+            animation: riseUp 0.5s ease-out;
+        }
+
+        @keyframes riseUp {
+            from { opacity: 0; transform: translateY(16px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* HEADER */
         .header {
             display: flex;
             justify-content: space-between;
@@ -150,33 +190,50 @@
             width: 48px;
             height: 48px;
             border-radius: 14px;
-            background: var(--grad);
+            background: var(--gradient-main);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
             color: #fff;
-            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+            box-shadow: 0 10px 24px var(--primary-glow);
         }
 
-        .brand-text h1 { font-size: 24px; font-weight: 800; color: var(--text-main); }
-        .brand-text p { color: var(--text-muted); font-size: 13px; font-weight: 500; }
+        .brand-text h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-text p {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
         .user-pill {
             display: flex;
             align-items: center;
-            gap: 12px;
-            background: #fff;
-            padding: 6px 16px;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 6px 14px;
             border-radius: 999px;
             border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
         }
 
         .user-name {
             font-size: 13px;
             font-weight: 700;
-            color: var(--text-main);
+            color: #f1f5f9;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -187,79 +244,116 @@
             height: 8px;
             background: var(--success);
             border-radius: 50%;
-            box-shadow: 0 0 8px rgba(22, 163, 74, 0.4);
+            box-shadow: 0 0 10px var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
 
         .btn-logout {
-            background: #f1f5f9;
-            border: none;
-            color: var(--text-muted);
-            padding: 4px 10px;
-            border-radius: 6px;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            color: #fca5a5;
+            padding: 6px 12px;
+            border-radius: var(--radius-md);
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
         }
-        .btn-logout:hover { background: #fee2e2; color: var(--error); }
 
-        .tabs {
-            display: flex;
-            background: #f1f5f9;
-            padding: 6px;
-            border-radius: var(--radius-lg);
-            margin-bottom: 24px;
-            gap: 8px;
+        .btn-logout:hover {
+            background: var(--error);
+            color: #fff;
         }
 
-        .tab-btn {
+        /* NAVIGATION TABS */
+        .nav-tabs {
+            display: flex;
+            background: var(--bg-input);
+            padding: 6px;
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border);
+            margin-bottom: 28px;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
             flex: 1;
-            padding: 12px 20px;
-            border-radius: var(--radius-md);
+            min-width: 140px;
+            padding: 12px 18px;
+            border-radius: var(--radius-lg);
             border: none;
             background: transparent;
             color: var(--text-muted);
             font-size: 14px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
         }
 
-        .tab-btn.active {
-            background: #ffffff;
-            color: var(--primary);
-            box-shadow: var(--shadow-sm);
+        .nav-btn.active {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
+        .nav-btn:hover:not(.active) {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* FORM ELEMENTS */
         .form-group { margin-bottom: 22px; }
         .form-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 
-        label { font-size: 13px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
+        label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.01em;
+        }
 
         .magic-btn {
-            background: rgba(79, 70, 229, 0.08);
-            border: 1px solid rgba(79, 70, 229, 0.2);
-            color: var(--primary);
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            color: #d8b4fe;
             padding: 5px 12px;
-            border-radius: 8px;
+            border-radius: var(--radius-md);
             font-size: 12px;
             font-weight: 700;
             cursor: pointer;
             transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
-        .magic-btn:hover { background: var(--primary); color: #fff; }
+
+        .magic-btn:hover {
+            background: rgba(168, 85, 247, 0.35);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        }
 
         textarea, select {
             width: 100%;
             padding: 14px 18px;
-            background: var(--input-bg);
+            background: var(--bg-input);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            color: var(--text-main);
+            color: #fff;
             font-size: 15px;
             outline: none;
             transition: all 0.2s;
@@ -267,16 +361,23 @@
         }
 
         textarea:focus, select:focus {
-            border-color: var(--border-focus);
-            background: #fff;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+            background: #0d1424;
         }
 
-        textarea { min-height: 95px; resize: vertical; }
+        textarea { min-height: 100px; resize: vertical; }
 
-        .chips-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        /* PROMPT CHIPS */
+        .chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
         .chip {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border);
             padding: 6px 14px;
             border-radius: 999px;
@@ -285,41 +386,54 @@
             color: var(--text-muted);
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
         }
+
         .chip:hover {
-            background: var(--grad-subtle);
-            border-color: var(--primary);
-            color: var(--primary);
+            background: rgba(99, 102, 241, 0.25);
+            border-color: rgba(99, 102, 241, 0.5);
+            color: #fff;
             transform: translateY(-1px);
         }
 
-        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
 
+        /* GENERATE BUTTON */
         .btn-generate {
             width: 100%;
             padding: 16px 28px;
             border-radius: var(--radius-lg);
             border: none;
-            background: var(--grad);
+            background: var(--gradient-main);
             color: #fff;
             font-size: 16px;
             font-weight: 800;
+            letter-spacing: 0.02em;
             cursor: pointer;
             transition: all 0.25s ease;
-            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.25);
+            box-shadow: 0 12px 30px var(--primary-glow);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
         }
-        .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 14px 35px rgba(79, 70, 229, 0.35); }
+
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px rgba(99, 102, 241, 0.5);
+        }
+
         .btn-generate:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
+        /* OUTPUT SHOWCASE */
         .output-card {
             margin-top: 32px;
-            background: #ffffff;
-            border-radius: var(--radius-xl);
+            background: var(--bg-input);
+            border-radius: var(--radius-2xl);
             border: 1px dashed var(--border);
             padding: 28px;
             min-height: 280px;
@@ -327,7 +441,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: var(--shadow-sm);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.4);
         }
 
         .output-media-container {
@@ -336,22 +450,28 @@
             flex-direction: column;
             align-items: center;
             gap: 18px;
-            animation: fadeIn 0.4s ease;
+            animation: riseUp 0.4s ease;
         }
 
         .output-media-container img, .output-media-container video {
             max-width: 100%;
             max-height: 520px;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .action-bar { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+        .action-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         .action-btn {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.06);
             border: 1px solid var(--border);
-            color: var(--text-main);
+            color: #e2e8f0;
             padding: 10px 18px;
             border-radius: var(--radius-md);
             font-size: 14px;
@@ -362,14 +482,19 @@
             gap: 8px;
             transition: all 0.2s;
             text-decoration: none;
-            box-shadow: var(--shadow-sm);
         }
-        .action-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
-        .action-btn.primary-act {
-            background: var(--grad);
+
+        .action-btn:hover {
+            background: var(--primary);
             color: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 6px 20px var(--primary-glow);
+        }
+
+        .action-btn.primary-act {
+            background: var(--gradient-main);
             border: none;
-            box-shadow: 0 6px 18px rgba(79, 70, 229, 0.25);
+            box-shadow: 0 6px 18px var(--primary-glow);
         }
 
         .placeholder-text {
@@ -381,40 +506,239 @@
             align-items: center;
             gap: 10px;
         }
-        .placeholder-icon { font-size: 38px; opacity: 0.6; }
 
-        .progress-wrap { width: 100%; max-width: 420px; margin-top: 14px; }
-        .progress-bar-bg { height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; background: var(--grad); border-radius: 999px; width: 0%; transition: width 0.4s ease; }
-        .progress-label { font-size: 13px; color: var(--text-muted); text-align: center; margin-top: 8px; font-weight: 600; }
+        .placeholder-icon { font-size: 40px; opacity: 0.6; }
 
-        .status-bar { margin-top: 16px; text-align: center; font-size: 14px; font-weight: 700; min-height: 22px; }
+        /* PROGRESS BAR */
+        .progress-wrap { width: 100%; max-width: 440px; margin-top: 14px; }
+        .progress-bar-bg {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--gradient-main);
+            border-radius: 999px;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+        .progress-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .status-bar {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            min-height: 22px;
+        }
         .status-bar.loading { color: var(--warn); }
         .status-bar.success { color: var(--success); }
         .status-bar.error { color: var(--error); }
 
-        .history-section { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border); }
-        .history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-        .history-header h3 { font-size: 13px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-        .history-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; }
+        /* ── 3. CREATOR ACADEMY & MASTERCLASS SECTION ── */
+        .guide-container {
+            display: none;
+            animation: riseUp 0.4s ease-out;
+        }
+
+        .guide-hero {
+            background: var(--gradient-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 28px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .guide-hero h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .guide-hero p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .guide-card {
+            background: var(--gradient-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            transition: all 0.3s;
+        }
+
+        .guide-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .guide-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        .guide-card h3 {
+            font-size: 17px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .guide-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .step-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            color: #cbd5e1;
+            line-height: 1.4;
+        }
+
+        .step-num {
+            background: var(--primary);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .prompt-template-box {
+            background: #080d1a;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 14px;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #93c5fd;
+            font-family: monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-copy-sm {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: 0.2s;
+        }
+
+        .btn-copy-sm:hover { background: var(--primary); }
+
+        /* ── 4. RECENT HISTORY SECTION ── */
+        .history-section {
+            margin-top: 36px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .history-header h3 {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 12px;
+        }
+
         .history-item {
             position: relative;
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-lg);
             overflow: hidden;
             aspect-ratio: 1;
-            background: #e2e8f0;
+            background: #080d18;
             border: 1px solid var(--border);
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: var(--shadow-sm);
         }
-        .history-item:hover { transform: scale(1.05); border-color: var(--primary); box-shadow: var(--shadow-md); }
-        .history-item img, .history-item video { width: 100%; height: 100%; object-fit: cover; }
+
+        .history-item:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 8px 25px var(--primary-glow);
+        }
+
+        .history-item img, .history-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .history-tag {
             position: absolute;
             bottom: 4px;
             right: 4px;
-            background: rgba(15, 23, 42, 0.75);
+            background: rgba(0,0,0,0.75);
             backdrop-filter: blur(4px);
             color: #fff;
             font-size: 9px;
@@ -423,9 +747,10 @@
             border-radius: 4px;
         }
 
-        @media (max-width: 680px) {
+        @media (max-width: 768px) {
             .studio-container { padding: 24px 18px; }
             .options-grid { grid-template-columns: 1fr; }
+            .guide-grid { grid-template-columns: 1fr; }
             .brand-text h1 { font-size: 20px; }
         }
     </style>
@@ -447,99 +772,201 @@
                 <label for="passwordInput">Password</label>
                 <input type="password" id="passwordInput" placeholder="Enter password" required>
             </div>
-            <button type="submit" class="btn-login">Sign In</button>
+            <button type="submit" class="btn-login">Sign In to Studio</button>
             <div class="login-error" id="loginError"></div>
         </form>
     </div>
 
     <!-- 2. STUDIO DASHBOARD -->
     <div class="studio-container" id="studioDashboard">
+        <!-- HEADER -->
         <div class="header">
             <div class="brand">
                 <div class="brand-icon">✦</div>
                 <div class="brand-text">
-                    <h1>Agnes AI Studio</h1>
-                    <p>Unlimited High-Speed Image &amp; Video Engine</p>
+                    <h1>Agnes Creative Studio</h1>
+                    <p>Next-Gen AI Image, Video &amp; Creator Academy</p>
                 </div>
             </div>
-            <div class="user-pill">
-                <div class="user-name">
-                    <span class="user-dot"></span>
-                    <span id="displayUser">Deepak</span>
+            <div class="header-actions">
+                <div class="user-pill">
+                    <div class="user-name">
+                        <span class="user-dot"></span>
+                        <span id="displayUser">Deepak</span>
+                    </div>
                 </div>
                 <button class="btn-logout" onclick="handleLogout()">Logout</button>
             </div>
         </div>
 
-        <div class="tabs">
-            <button class="tab-btn active" id="tabImage" onclick="setMode('image')">
-                <span>🖼️</span> HD Image Generator (2s)
+        <!-- NAVIGATION TABS -->
+        <div class="nav-tabs">
+            <button class="nav-btn active" id="tabImage" onclick="switchSection('image')">
+                <span>🖼️</span> HD Image Studio (2s)
             </button>
-            <button class="tab-btn" id="tabVideo" onclick="setMode('video')">
-                <span>🎬</span> Cinematic Video Generator (Unlimited)
+            <button class="nav-btn" id="tabVideo" onclick="switchSection('video')">
+                <span>🎬</span> Cinematic Video Studio
+            </button>
+            <button class="nav-btn" id="tabGuide" onclick="switchSection('guide')">
+                <span>📚</span> Creator Academy &amp; Masterclass
             </button>
         </div>
 
-        <div class="form-group">
-            <div class="form-header">
-                <label for="promptInput">🎯 Prompt Description (English / Roman Urdu)</label>
-                <button class="magic-btn" onclick="enhancePrompt()">✨ Polish Prompt</button>
-            </div>
-            <textarea id="promptInput" placeholder="Describe your vision (e.g. A sleek supercar cruising through a rainy neon Tokyo street, 8k cinematic lighting...)">A futuristic black sports car driving fast through a rainy neon-lit Tokyo street at night, cinematic 8k photorealistic, reflections on wet asphalt</textarea>
-            
-            <div class="chips-container">
-                <span class="chip" onclick="addTag('cyberpunk neon city, rainy night, 8k')">🏙️ Cyberpunk City</span>
-                <span class="chip" onclick="addTag('photorealistic portrait, 85mm lens, golden hour studio light')">📸 HD Portrait</span>
-                <span class="chip" onclick="addTag('drone shot of turquoise ocean sunset, slow motion 4k')">🌊 Ocean Sunset</span>
-                <span class="chip" onclick="addTag('majestic supercar, volumetric smoke, sharp reflections')">🏎️ Supercar</span>
-                <span class="chip" onclick="addTag('unreal engine 5 render, hyper-detailed, octane render')">🎮 3D Cinematic</span>
-            </div>
-        </div>
-
-        <div class="options-grid">
-            <div class="form-group" id="aspectRatioGroup">
-                <label for="aspectRatio">📐 Image Aspect Ratio</label>
-                <select id="aspectRatio">
-                    <option value="1024x1024">Square (1024×1024 HD)</option>
-                    <option value="1280x768">Widescreen (1280×768 16:9)</option>
-                    <option value="768x1280">Portrait (768×1280 Mobile)</option>
-                </select>
-            </div>
-
-            <div class="form-group" id="videoResGroup" style="display:none;">
-                <label for="videoResolution">📐 Video Aspect &amp; Resolution</label>
-                <select id="videoResolution">
-                    <option value="1152x768">1152×768 (Cinematic Widescreen HD)</option>
-                    <option value="768x768" selected>768×768 (Square HD)</option>
-                    <option value="1024x576">1024×576 (Standard 16:9)</option>
-                </select>
-            </div>
-
+        <!-- ── STUDIO CREATION SECTION (Image & Video) ── -->
+        <div id="creationSection">
             <div class="form-group">
-                <label for="qualityPreset">💎 Style &amp; Mood Preset</label>
-                <select id="qualityPreset">
-                    <option value="">Cinematic Photorealism (Default)</option>
-                    <option value=", anime masterpiece, vivid colors, detailed">Anime Masterpiece</option>
-                    <option value=", unreal engine 5 render, raytracing, octane">3D / Unreal Engine</option>
-                    <option value=", neon cyberpunk atmosphere, moody, dark">Cyberpunk Neon</option>
-                </select>
+                <div class="form-header">
+                    <label for="promptInput">🎯 Prompt Description (English / Roman Urdu)</label>
+                    <button class="magic-btn" onclick="enhancePrompt()">✨ Polish Prompt</button>
+                </div>
+                <textarea id="promptInput" placeholder="Describe your vision (e.g. A sleek supercar cruising through a rainy neon Tokyo street, 8k cinematic lighting...)">A futuristic black sports car driving fast through a rainy neon-lit Tokyo street at night, cinematic 8k photorealistic, reflections on wet asphalt</textarea>
+                
+                <div class="chips-container">
+                    <span class="chip" onclick="addTag('cyberpunk neon city, rainy night, 8k')">🏙️ Cyberpunk City</span>
+                    <span class="chip" onclick="addTag('photorealistic portrait, 85mm lens, golden hour studio light')">📸 HD Portrait</span>
+                    <span class="chip" onclick="addTag('drone shot of turquoise ocean sunset, slow motion 4k')">🌊 Ocean Sunset</span>
+                    <span class="chip" onclick="addTag('majestic supercar, volumetric smoke, sharp reflections')">🏎️ Supercar</span>
+                    <span class="chip" onclick="addTag('unreal engine 5 render, hyper-detailed, octane render')">🎮 3D Cinematic</span>
+                </div>
+            </div>
+
+            <div class="options-grid">
+                <div class="form-group" id="aspectRatioGroup">
+                    <label for="aspectRatio">📐 Image Aspect Ratio</label>
+                    <select id="aspectRatio">
+                        <option value="1024x1024">Square (1024×1024 HD)</option>
+                        <option value="1280x768">Widescreen (1280×768 16:9)</option>
+                        <option value="768x1280">Portrait (768×1280 Mobile)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="videoResGroup" style="display:none;">
+                    <label for="videoResolution">📐 Video Aspect &amp; Resolution</label>
+                    <select id="videoResolution">
+                        <option value="1152x768">1152×768 (Cinematic Widescreen HD)</option>
+                        <option value="768x768" selected>768×768 (Square HD)</option>
+                        <option value="1024x576">1024×576 (Standard 16:9)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="qualityPreset">💎 Style &amp; Mood Preset</label>
+                    <select id="qualityPreset">
+                        <option value="">Cinematic Photorealism (Default)</option>
+                        <option value=", anime masterpiece, vivid colors, detailed">Anime Masterpiece</option>
+                        <option value=", unreal engine 5 render, raytracing, octane">3D / Unreal Engine</option>
+                        <option value=", neon cyberpunk atmosphere, moody, dark">Cyberpunk Neon</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn-generate" id="generateBtn" onclick="handleGenerate()">
+                <span id="btnText">🚀 Generate HD Image (2s)</span>
+            </button>
+
+            <div class="status-bar" id="statusBar">Ready for creation</div>
+
+            <div class="output-card" id="outputCard">
+                <div class="placeholder-text" id="placeholder">
+                    <div class="placeholder-icon">✨</div>
+                    <div>Your generated masterpiece will appear here</div>
+                    <div style="font-size:13px; color:#94a3b8; margin-top:4px;">Image takes ~2s · Video takes ~45-90s (100% Free &amp; Unlimited)</div>
+                </div>
             </div>
         </div>
 
-        <button class="btn-generate" id="generateBtn" onclick="handleGenerate()">
-            <span id="btnText">🚀 Generate HD Image (2s)</span>
-        </button>
+        <!-- ── 3. CREATOR ACADEMY & GUIDANCE MASTERCLASS ── -->
+        <div class="guide-container" id="guideSection">
+            <div class="guide-hero">
+                <h2>🚀 AI Video Creator Blueprint &amp; Viral Playbook</h2>
+                <p>Learn how top creators turn 5-second AI video clips into 1-minute viral Instagram Reels, YouTube Shorts, and cinematic masterpieces with sound effects &amp; voiceovers.</p>
+            </div>
 
-        <div class="status-bar" id="statusBar">Ready for creation</div>
+            <div class="guide-grid">
+                <!-- CARD 1: LONG VIDEO CREATION -->
+                <div class="guide-card">
+                    <div class="guide-card-icon">🎬</div>
+                    <h3>1. 5s Clips Se 1-Min Video Kaise Banayein?</h3>
+                    <p>AI models 5-second scenes render karte hain. Long video banane ka professional 3-step formula:</p>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <span class="step-num">1</span>
+                            <span><strong>Shot Planning:</strong> Apni story ko 6 scenes mein banto (6 scenes × 5s = 30 seconds).</span>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-num">2</span>
+                            <span><strong>Angle Variation:</strong> Har clip mein camera angle change karo (Drone shot ➔ Close-up ➔ Action shot).</span>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-num">3</span>
+                            <span><strong>CapCut / Premiere Merge:</strong> Sabhi 5s clips ko CapCut mein line se laga kar smooth cross-dissolve transitions add karo.</span>
+                        </li>
+                    </ul>
+                </div>
 
-        <div class="output-card" id="outputCard">
-            <div class="placeholder-text" id="placeholder">
-                <div class="placeholder-icon">✨</div>
-                <div>Your generated creation will appear here</div>
-                <div style="font-size:13px; color:#94a3b8; margin-top:4px;">Image takes ~2s · Video takes ~45-90s (100% Free &amp; Unlimited)</div>
+                <!-- CARD 2: FREE AI VOICEOVER & SOUND -->
+                <div class="guide-card">
+                    <div class="guide-card-icon">🎙️</div>
+                    <h3>2. Free AI Voiceover &amp; Sound Design</h3>
+                    <p>Top free tools jahan se realistic voice aur background music lagana hai:</p>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <span class="step-num">1</span>
+                            <span><strong>ElevenLabs (Free):</strong> Best realistic AI human voices (English &amp; Hindi/Urdu).</span>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-num">2</span>
+                            <span><strong>CapCut Text-to-Speech:</strong> App ke andar direct text likho aur viral narrator voice select karo.</span>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-num">3</span>
+                            <span><strong>Freesound.org / Pixabay:</strong> Free cinematic sound effects (whoosh, rain, car engine, bass drops).</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- CARD 3: VIRAL PROMPT FORMULA -->
+                <div class="guide-card">
+                    <div class="guide-card-icon">💎</div>
+                    <h3>3. Hollywood Prompt Engineering Formula</h3>
+                    <p>Har prompt mein ye 4 elements zaroor dalo taaki video high-quality aaye:</p>
+                    <div style="font-size:13px; color:#cbd5e1; margin-bottom:10px;">
+                        <code>[Subject] + [Action/Motion] + [Lighting &amp; Environment] + [Camera &amp; 8k Quality]</code>
+                    </div>
+                    <div class="prompt-template-box">
+                        <span>A luxury supercar speeding on rainy wet neon street, dynamic drone tracking shot, 8k cinematic</span>
+                        <button class="btn-copy-sm" onclick="copyTemplate(this, 'A luxury supercar speeding on rainy wet neon street, dynamic drone tracking shot, 8k cinematic')">Copy</button>
+                    </div>
+                    <div class="prompt-template-box">
+                        <span>Cinematic portrait of warrior in golden hour, 85mm lens, atmospheric fog, volumetric lighting</span>
+                        <button class="btn-copy-sm" onclick="copyTemplate(this, 'Cinematic portrait of warrior in golden hour, 85mm lens, atmospheric fog, volumetric lighting')">Copy</button>
+                    </div>
+                </div>
+
+                <!-- CARD 4: SOCIAL MEDIA VIRAL STRATEGY -->
+                <div class="guide-card">
+                    <div class="guide-card-icon">📈</div>
+                    <h3>4. Instagram &amp; YouTube Growth Secret</h3>
+                    <p>AI content ko million views tak pahunchane ke proven algorithm tips:</p>
+                    <ul class="step-list">
+                        <li class="step-item">
+                            <span class="step-num">1</span>
+                            <span><strong>First 3-Second Hook:</strong> Pehle scene mein fast action ya bold question dalo taaki scroll stop ho.</span>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-num">2</span>
+                            <span><strong>Aspect Ratio Rule:</strong> Reels &amp; Shorts ke liye <code>768x1280 (9:16)</code> ya <code>768x768 (1:1)</code> use karo.</span>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-num">3</span>
+                            <span><strong>Best Posting Times:</strong> 12:00 PM – 2:00 PM aur 6:00 PM – 8:30 PM par post karo.</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
+        <!-- 4. RECENT HISTORY -->
         <div class="history-section" id="historySection" style="display:none;">
             <div class="history-header">
                 <h3>📜 Recent Creations</h3>
@@ -553,7 +980,6 @@
         const AUTH_USER = "Deepak";
         const AUTH_PASS = "Deepak8890@";
 
-        // Agnes AI Free & Unlimited Engine
         const API_KEY  = "sk-LXYabeboAhpqdaSX3hEuzMp2EKQm4fPDnUlHPN6S568diaz7";
         const BASE_URL = "https://apihub.agnes-ai.com/v1";
 
@@ -567,6 +993,9 @@
         const passwordInput   = document.getElementById('passwordInput');
         const displayUser     = document.getElementById('displayUser');
 
+        const creationSection = document.getElementById('creationSection');
+        const guideSection    = document.getElementById('guideSection');
+
         const promptInput     = document.getElementById('promptInput');
         const generateBtn     = document.getElementById('generateBtn');
         const btnText         = document.getElementById('btnText');
@@ -574,6 +1003,7 @@
         const outputCard      = document.getElementById('outputCard');
         const tabImage        = document.getElementById('tabImage');
         const tabVideo        = document.getElementById('tabVideo');
+        const tabGuide        = document.getElementById('tabGuide');
         const aspectRatioGroup= document.getElementById('aspectRatioGroup');
         const videoResGroup   = document.getElementById('videoResGroup');
         const videoResolution = document.getElementById('videoResolution');
@@ -627,26 +1057,48 @@
 
         checkSession();
 
-        function setMode(mode) {
-            currentMode = mode;
-            if (mode === 'image') {
+        function switchSection(section) {
+            tabImage.classList.remove('active');
+            tabVideo.classList.remove('active');
+            tabGuide.classList.remove('active');
+
+            if (section === 'image') {
                 tabImage.classList.add('active');
-                tabVideo.classList.remove('active');
+                creationSection.style.display = 'block';
+                guideSection.style.display = 'none';
                 aspectRatioGroup.style.display = 'block';
                 videoResGroup.style.display = 'none';
                 btnText.textContent = '🚀 Generate HD Image (2s)';
-            } else {
+                currentMode = 'image';
+            } else if (section === 'video') {
                 tabVideo.classList.add('active');
-                tabImage.classList.remove('active');
+                creationSection.style.display = 'block';
+                guideSection.style.display = 'none';
                 aspectRatioGroup.style.display = 'none';
                 videoResGroup.style.display = 'block';
                 btnText.textContent = '🎬 Generate HD Video (~45s)';
+                currentMode = 'video';
+            } else if (section === 'guide') {
+                tabGuide.classList.add('active');
+                creationSection.style.display = 'none';
+                guideSection.style.display = 'block';
             }
         }
 
         function addTag(tag) {
             const current = promptInput.value.trim();
             promptInput.value = current ? current + ', ' + tag : tag;
+        }
+
+        function copyTemplate(btn, text) {
+            navigator.clipboard.writeText(text);
+            const prev = btn.textContent;
+            btn.textContent = 'Copied!';
+            btn.style.background = 'var(--success)';
+            setTimeout(() => {
+                btn.textContent = prev;
+                btn.style.background = '';
+            }, 1500);
         }
 
         function enhancePrompt() {
@@ -751,7 +1203,10 @@
                 const h = document.createElement('div');
                 h.className = 'history-item';
                 h.title = item.prompt;
-                h.onclick = () => showResult(item.url, item.type, item.prompt);
+                h.onclick = () => {
+                    switchSection(item.type);
+                    showResult(item.url, item.type, item.prompt);
+                };
 
                 if (item.type === 'image') {
                     h.innerHTML = `<img src="${item.url}" alt="history"><span class="history-tag">IMG</span>`;
@@ -804,7 +1259,6 @@
             const fullPrompt = prompt + style;
             const [width, height] = videoResolution.value.split('x').map(Number);
 
-            // Step 1: Submit video task with auto-retry
             let submitData = null;
             for (let retry = 0; retry < 3; retry++) {
                 const submitResp = await fetch(`${BASE_URL}/videos`, {
@@ -823,7 +1277,6 @@
                 submitData = await submitResp.json();
                 if (submitData.id || submitData.task_id || submitData.video_id) break;
 
-                // Handle rate-limits or queue busy
                 if (submitData.error?.code === "rate_limit_exceeded" || submitData.code === "video_queue_full") {
                     setStatus(`⏳ Cloud node busy, auto-retrying in 8s... (${retry + 1}/3)`, 'loading');
                     await new Promise(r => setTimeout(r, 8000));
@@ -837,7 +1290,6 @@
                 throw new Error(submitData.error?.message || submitData.message || 'Cloud cluster is momentarily busy. Please retry in 30 seconds.');
             }
 
-            // Step 2: Poll status
             const startTime = Date.now();
             for (let i = 1; i <= 90; i++) {
                 await new Promise(r => setTimeout(r, 3000));
@@ -910,7 +1362,7 @@
                 `;
             } finally {
                 generateBtn.disabled = false;
-                setMode(currentMode);
+                switchSection(currentMode);
             }
         }
     </script>
