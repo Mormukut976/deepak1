@@ -804,29 +804,45 @@
             const fullPrompt = prompt + style;
             const [width, height] = videoResolution.value.split('x').map(Number);
 
-            const submitResp = await fetch(`${BASE_URL}/videos`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${API_KEY}`
-                },
-                body: JSON.stringify({
-                    model: "agnes-video-v2.0",
-                    prompt: fullPrompt,
-                    width: width,
-                    height: height
-                })
-            });
-            if (!submitResp.ok) throw new Error(`Video Submit Error: ${await submitResp.text()}`);
-            const submitData = await submitResp.json();
-            const taskId = submitData.id || submitData.task_id || submitData.video_id;
+            // Step 1: Submit video task with auto-retry
+            let submitData = null;
+            for (let retry = 0; retry < 3; retry++) {
+                const submitResp = await fetch(`${BASE_URL}/videos`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: "agnes-video-v2.0",
+                        prompt: fullPrompt,
+                        width: width,
+                        height: height
+                    })
+                });
+                submitData = await submitResp.json();
+                if (submitData.id || submitData.task_id || submitData.video_id) break;
 
+                // Handle rate-limits or queue busy
+                if (submitData.error?.code === "rate_limit_exceeded" || submitData.code === "video_queue_full") {
+                    setStatus(`⏳ Cloud node busy, auto-retrying in 8s... (${retry + 1}/3)`, 'loading');
+                    await new Promise(r => setTimeout(r, 8000));
+                } else {
+                    throw new Error(submitData.error?.message || submitData.message || 'Video submit failed');
+                }
+            }
+
+            const taskId = submitData.id || submitData.task_id || submitData.video_id;
+            if (!taskId) {
+                throw new Error(submitData.error?.message || submitData.message || 'Cloud cluster is momentarily busy. Please retry in 30 seconds.');
+            }
+
+            // Step 2: Poll status
             const startTime = Date.now();
             for (let i = 1; i <= 90; i++) {
                 await new Promise(r => setTimeout(r, 3000));
                 const elapsed = Math.round((Date.now() - startTime) / 1000);
                 
-                // Continuous smooth visual progress bar
                 const currentPct = Math.min(10 + Math.round((elapsed / 65) * 85), 96);
                 const pbar = document.getElementById('pbar');
                 const plabel = document.getElementById('plabel');
@@ -888,8 +904,8 @@
                 outputCard.innerHTML = `
                     <div class="placeholder-text" style="color:var(--error);">
                         <div class="placeholder-icon">⚠️</div>
-                        <div style="font-weight:700;">Generation Failed</div>
-                        <div style="font-size:13px; max-width:400px; color:var(--text-muted);">${err.message}</div>
+                        <div style="font-weight:700;">Generation Notice</div>
+                        <div style="font-size:13px; max-width:420px; color:var(--text-muted); line-height:1.4; margin-top:4px;">${err.message}</div>
                     </div>
                 `;
             } finally {
