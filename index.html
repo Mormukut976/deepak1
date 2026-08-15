@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✦ Agnes AI Creative Studio – Enterprise Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --surface: rgba(255, 255, 255, 0.90);
+            --surface-card: #ffffff;
+            --input-bg: #f8fafc;
+            --border: #e2e8f0;
+            --border-focus: #6366f1;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --grad: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+            --grad-subtle: linear-gradient(135deg, rgba(79,70,229,0.06) 0%, rgba(124,58,237,0.06) 100%);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --text-light: #94a3b8;
+            --success: #16a34a;
+            --warn: #d97706;
+            --error: #dc2626;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+            --shadow-lg: 0 25px 50px -12px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
+            --radius-xl: 24px;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(219, 39, 119, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 50% 30%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 16px;
+        }
+
+        /* ── AUTH CONTAINER ── */
+        .login-card {
+            max-width: 440px;
+            width: 100%;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            padding: 44px 36px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            text-align: center;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .login-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: var(--grad);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            box-shadow: 0 12px 24px rgba(79, 70, 229, 0.25);
+        }
+
+        .login-card h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .login-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .login-field {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .login-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .login-field input {
+            width: 100%;
+            padding: 13px 16px;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-size: 15px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .login-field input:focus {
+            border-color: var(--border-focus);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: var(--grad);
+            border: none;
+            border-radius: var(--radius-md);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 28px rgba(79, 70, 229, 0.35);
+        }
+
+        .login-error {
+            color: var(--error);
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 14px;
+            min-height: 18px;
+        }
+
+        /* ── DASHBOARD ── */
+        .studio-container {
+            display: none;
+            max-width: 1060px;
+            width: 100%;
+            background: var(--surface);
+            backdrop-filter: blur(28px);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 28px;
+        }
+
+        .brand { display: flex; align-items: center; gap: 14px; }
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: var(--grad);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+        }
+
+        .brand-text h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+        }
+
+        .brand-text p {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .user-pill {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #fff;
+            padding: 6px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .user-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .user-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(22, 163, 74, 0.4);
+        }
+
+        .btn-logout {
+            background: #f1f5f9;
+            border: none;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-logout:hover {
+            background: #fee2e2;
+            color: var(--error);
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            background: #f1f5f9;
+            padding: 6px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 24px;
+            gap: 8px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: var(--radius-md);
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab-btn.active {
+            background: #ffffff;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* FORM */
+        .form-group { margin-bottom: 22px; }
+        .form-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+
+        label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .magic-btn {
+            background: rgba(79, 70, 229, 0.08);
+            border: 1px solid rgba(79, 70, 229, 0.2);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .magic-btn:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        textarea, select {
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            color: var(--text-main);
+            font-size: 15px;
+            outline: none;
+            transition: all 0.2s;
+            line-height: 1.5;
+        }
+
+        textarea:focus, select:focus {
+            border-color: var(--border-focus);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        textarea { min-height: 95px; resize: vertical; }
+
+        .chips-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .chip {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+
+        .chip:hover {
+            background: var(--grad-subtle);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+
+        .btn-generate {
+            width: 100%;
+            padding: 16px 28px;
+            border-radius: var(--radius-lg);
+            border: none;
+            background: var(--grad);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 35px rgba(79, 70, 229, 0.35);
+        }
+
+        .btn-generate:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        /* OUTPUT BOX */
+        .output-card {
+            margin-top: 32px;
+            background: #ffffff;
+            border-radius: var(--radius-xl);
+            border: 1px dashed var(--border);
+            padding: 28px;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .output-media-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .output-media-container img, .output-media-container video {
+            max-width: 100%;
+            max-height: 520px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .action-bar { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+        .action-btn {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .action-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .action-btn.primary-act {
+            background: var(--grad);
+            color: #fff;
+            border: none;
+            box-shadow: 0 6px 18px rgba(79, 70, 229, 0.25);
+        }
+
+        .placeholder-text {
+            color: var(--text-muted);
+            font-size: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .placeholder-icon { font-size: 38px; opacity: 0.6; }
+
+        .progress-wrap { width: 100%; max-width: 420px; margin-top: 14px; }
+        .progress-bar-bg {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--grad);
+            border-radius: 999px;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+        .progress-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .status-bar {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            min-height: 22px;
+        }
+        .status-bar.loading { color: var(--warn); }
+        .status-bar.success { color: var(--success); }
+        .status-bar.error { color: var(--error); }
+
+        /* RECENT HISTORY */
+        .history-section {
+            margin-top: 36px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .history-header h3 {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 12px;
+        }
+
+        .history-item {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            aspect-ratio: 1;
+            background: #e2e8f0;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .history-item:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .history-item img, .history-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .history-tag {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 680px) {
+            .studio-container { padding: 24px 18px; }
+            .options-grid { grid-template-columns: 1fr; }
+            .brand-text h1 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── 1. LOGIN SCREEN ── -->
+    <div class="login-card" id="loginCard">
+        <div class="login-icon">✦</div>
+        <h2>Agnes AI Studio</h2>
+        <p>Enterprise AI Media Generator</p>
+
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="login-field">
+                <label for="usernameInput">Username</label>
+                <input type="text" id="usernameInput" placeholder="Enter username" required autofocus>
+            </div>
+            <div class="login-field">
+                <label for="passwordInput">Password</label>
+                <input type="password" id="passwordInput" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="btn-login">Sign In</button>
+            <div class="login-error" id="loginError"></div>
+        </form>
+    </div>
+
+    <!-- ── 2. STUDIO DASHBOARD ── -->
+    <div class="studio-container" id="studioDashboard">
+        <div class="header">
+            <div class="brand">
+                <div class="brand-icon">✦</div>
+                <div class="brand-text">
+                    <h1>Agnes AI Studio</h1>
+                    <p>Enterprise High-Speed Image &amp; Video Engine</p>
+                </div>
+            </div>
+            <div class="user-pill">
+                <div class="user-name">
+                    <span class="user-dot"></span>
+                    <span id="displayUser">Deepak</span>
+                </div>
+                <button class="btn-logout" onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" id="tabImage" onclick="setMode('image')">
+                <span>🖼️</span> HD Image Generator (2s)
+            </button>
+            <button class="tab-btn" id="tabVideo" onclick="setMode('video')">
+                <span>🎬</span> Cinematic Video Generator (720p)
+            </button>
+        </div>
+
+        <div class="form-group">
+            <div class="form-header">
+                <label for="promptInput">🎯 Prompt Description (English / Roman Urdu)</label>
+                <button class="magic-btn" onclick="enhancePrompt()">✨ Polish Prompt</button>
+            </div>
+            <textarea id="promptInput" placeholder="Describe your vision (e.g. A sleek supercar cruising through a rainy neon Tokyo street, 8k cinematic lighting...)">A futuristic black sports car driving fast through a rainy neon-lit Tokyo street at night, cinematic 8k photorealistic, reflections on wet asphalt</textarea>
+            
+            <div class="chips-container">
+                <span class="chip" onclick="addTag('cyberpunk neon city, rainy night, 8k')">🏙️ Cyberpunk City</span>
+                <span class="chip" onclick="addTag('photorealistic portrait, 85mm lens, golden hour studio light')">📸 HD Portrait</span>
+                <span class="chip" onclick="addTag('drone shot of turquoise ocean sunset, slow motion 4k')">🌊 Ocean Sunset</span>
+                <span class="chip" onclick="addTag('majestic supercar, volumetric smoke, sharp reflections')">🏎️ Supercar</span>
+                <span class="chip" onclick="addTag('unreal engine 5 render, hyper-detailed, octane render')">🎮 3D Cinematic</span>
+            </div>
+        </div>
+
+        <div class="options-grid">
+            <div class="form-group" id="aspectRatioGroup">
+                <label for="aspectRatio">📐 Image Aspect Ratio</label>
+                <select id="aspectRatio">
+                    <option value="1024x1024">Square (1024×1024 HD)</option>
+                    <option value="1280x768">Widescreen (1280×768 16:9)</option>
+                    <option value="768x1280">Portrait (768×1280 Mobile)</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="videoResGroup" style="display:none;">
+                <label for="videoResolution">📐 Video Resolution</label>
+                <select id="videoResolution">
+                    <option value="720p">720p HD (High-Speed Cinematic ~35s)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="qualityPreset">💎 Style &amp; Mood Preset</label>
+                <select id="qualityPreset">
+                    <option value="">Cinematic Photorealism (Default)</option>
+                    <option value=", anime masterpiece, vivid colors, detailed">Anime Masterpiece</option>
+                    <option value=", unreal engine 5 render, raytracing, octane">3D / Unreal Engine</option>
+                    <option value=", neon cyberpunk atmosphere, moody, dark">Cyberpunk Neon</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn-generate" id="generateBtn" onclick="handleGenerate()">
+            <span id="btnText">🚀 Generate HD Image (2s)</span>
+        </button>
+
+        <div class="status-bar" id="statusBar">Ready for creation</div>
+
+        <div class="output-card" id="outputCard">
+            <div class="placeholder-text" id="placeholder">
+                <div class="placeholder-icon">✨</div>
+                <div>Your generated creation will appear here</div>
+                <div style="font-size:13px; color:#94a3b8; margin-top:4px;">Image takes ~2s · Video takes ~35s</div>
+            </div>
+        </div>
+
+        <div class="history-section" id="historySection" style="display:none;">
+            <div class="history-header">
+                <h3>📜 Recent Creations</h3>
+                <span style="font-size:12px; color:#64748b;" id="historyCount">0 items</span>
+            </div>
+            <div class="history-grid" id="historyGrid"></div>
+        </div>
+    </div>
+
+    <script>
+        // =============================================
+        // CREDENTIALS & CONFIG
+        // =============================================
+        const AUTH_USER = "Deepak";
+        const AUTH_PASS = "Deepak8890@";
+
+        const API_KEY  = "nvai-b34d22708e3b2941fc9cc7b9835b05e3d80cc3cbb7a568e5";
+        const BASE_URL = "https://aiapi-pro.com/v1";
+
+        let currentMode = 'image';
+        const historyItems = [];
+
+        // DOM Refs
+        const loginCard       = document.getElementById('loginCard');
+        const studioDashboard = document.getElementById('studioDashboard');
+        const loginError      = document.getElementById('loginError');
+        const usernameInput   = document.getElementById('usernameInput');
+        const passwordInput   = document.getElementById('passwordInput');
+        const displayUser     = document.getElementById('displayUser');
+
+        const promptInput     = document.getElementById('promptInput');
+        const generateBtn     = document.getElementById('generateBtn');
+        const btnText         = document.getElementById('btnText');
+        const statusBar       = document.getElementById('statusBar');
+        const outputCard      = document.getElementById('outputCard');
+        const tabImage        = document.getElementById('tabImage');
+        const tabVideo        = document.getElementById('tabVideo');
+        const aspectRatioGroup= document.getElementById('aspectRatioGroup');
+        const videoResGroup   = document.getElementById('videoResGroup');
+        const aspectRatio     = document.getElementById('aspectRatio');
+        const qualityPreset   = document.getElementById('qualityPreset');
+        const historySection  = document.getElementById('historySection');
+        const historyGrid     = document.getElementById('historyGrid');
+        const historyCount    = document.getElementById('historyCount');
+
+        // =============================================
+        // AUTHENTICATION LOGIC
+        // =============================================
+        function checkSession() {
+            const isAuth = sessionStorage.getItem('agnes_auth');
+            const savedUser = sessionStorage.getItem('agnes_user');
+            if (isAuth === 'true' && savedUser) {
+                loginCard.style.display = 'none';
+                studioDashboard.style.display = 'block';
+                displayUser.textContent = savedUser;
+            } else {
+                loginCard.style.display = 'block';
+                studioDashboard.style.display = 'none';
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const u = usernameInput.value.trim();
+            const p = passwordInput.value.trim();
+
+            if (u === AUTH_USER && p === AUTH_PASS) {
+                sessionStorage.setItem('agnes_auth', 'true');
+                sessionStorage.setItem('agnes_user', u);
+                loginError.textContent = '';
+                loginCard.style.display = 'none';
+                studioDashboard.style.display = 'block';
+                displayUser.textContent = u;
+            } else {
+                loginError.textContent = '❌ Invalid Username or Password';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem('agnes_auth');
+            sessionStorage.removeItem('agnes_user');
+            loginCard.style.display = 'block';
+            studioDashboard.style.display = 'none';
+            usernameInput.value = '';
+            passwordInput.value = '';
+            loginError.textContent = '';
+        }
+
+        checkSession();
+
+        // =============================================
+        // MODE SWITCHER
+        // =============================================
+        function setMode(mode) {
+            currentMode = mode;
+            if (mode === 'image') {
+                tabImage.classList.add('active');
+                tabVideo.classList.remove('active');
+                aspectRatioGroup.style.display = 'block';
+                videoResGroup.style.display = 'none';
+                btnText.textContent = '🚀 Generate HD Image (2s)';
+            } else {
+                tabVideo.classList.add('active');
+                tabImage.classList.remove('active');
+                aspectRatioGroup.style.display = 'none';
+                videoResGroup.style.display = 'block';
+                btnText.textContent = '🎬 Generate 720p Video (~35s)';
+            }
+        }
+
+        // =============================================
+        // PROMPT CHIPS & POLISHER
+        // =============================================
+        function addTag(tag) {
+            const current = promptInput.value.trim();
+            promptInput.value = current ? current + ', ' + tag : tag;
+        }
+
+        function enhancePrompt() {
+            let p = promptInput.value.trim();
+            if (!p) return;
+            const enhancements = [
+                ", cinematic 8k photorealistic, volumetric dynamic lighting, ultra-detailed textures, octane render, masterpiece",
+                ", hyper-detailed, dramatic atmosphere, 85mm sharp focus, professional color grading",
+                ", unreal engine 5 render, raytracing reflections, sharp details, award winning photography"
+            ];
+            const chosen = enhancements[Math.floor(Math.random() * enhancements.length)];
+            promptInput.value = `${p}${chosen}`;
+            setStatus('✨ Prompt polished with quality boosters!', 'success');
+        }
+
+        function setStatus(msg, type = '') {
+            statusBar.textContent = msg;
+            statusBar.className = 'status-bar ' + type;
+        }
+
+        // =============================================
+        // BLOB DIRECT DOWNLOAD (Forces file save)
+        // =============================================
+        async function downloadDirect(url, type) {
+            setStatus('⏳ Preparing download...', 'loading');
+            try {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = blobUrl;
+                a.download = `agnes_${type}_${Date.now()}.${type === 'image' ? 'png' : 'mp4'}`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(blobUrl);
+                setStatus('✅ Download started successfully!', 'success');
+            } catch (err) {
+                window.open(url, '_blank');
+                setStatus('✅ Opened in new tab for direct download!', 'success');
+            }
+        }
+
+        function copyPrompt() {
+            navigator.clipboard.writeText(promptInput.value);
+            setStatus('📋 Prompt copied to clipboard!', 'success');
+        }
+
+        // =============================================
+        // RENDER RESULT & HISTORY
+        // =============================================
+        function showResult(url, type, prompt) {
+            outputCard.innerHTML = '';
+            const container = document.createElement('div');
+            container.className = 'output-media-container';
+
+            let mediaEl;
+            if (type === 'image') {
+                mediaEl = document.createElement('img');
+                mediaEl.src = url;
+                mediaEl.alt = prompt;
+            } else {
+                mediaEl = document.createElement('video');
+                mediaEl.src = url;
+                mediaEl.controls = true;
+                mediaEl.autoplay = true;
+                mediaEl.loop = true;
+            }
+            container.appendChild(mediaEl);
+
+            const actionBar = document.createElement('div');
+            actionBar.className = 'action-bar';
+
+            const dBtn = document.createElement('button');
+            dBtn.className = 'action-btn primary-act';
+            dBtn.innerHTML = '⬇️ Download HD File';
+            dBtn.onclick = () => downloadDirect(url, type);
+
+            const cBtn = document.createElement('button');
+            cBtn.className = 'action-btn';
+            cBtn.innerHTML = '📋 Copy Prompt';
+            cBtn.onclick = copyPrompt;
+
+            const oBtn = document.createElement('a');
+            oBtn.className = 'action-btn';
+            oBtn.href = url;
+            oBtn.target = '_blank';
+            oBtn.innerHTML = '🔍 Fullscreen';
+
+            actionBar.appendChild(dBtn);
+            actionBar.appendChild(cBtn);
+            actionBar.appendChild(oBtn);
+            container.appendChild(actionBar);
+
+            outputCard.appendChild(container);
+
+            historyItems.unshift({ url, type, prompt });
+            renderHistory();
+        }
+
+        function renderHistory() {
+            if (historyItems.length === 0) return;
+            historySection.style.display = 'block';
+            historyCount.textContent = `${historyItems.length} creations`;
+            historyGrid.innerHTML = '';
+
+            historyItems.slice(0, 12).forEach(item => {
+                const h = document.createElement('div');
+                h.className = 'history-item';
+                h.title = item.prompt;
+                h.onclick = () => showResult(item.url, item.type, item.prompt);
+
+                if (item.type === 'image') {
+                    h.innerHTML = `<img src="${item.url}" alt="history"><span class="history-tag">IMG</span>`;
+                } else {
+                    h.innerHTML = `<video src="${item.url}" muted></video><span class="history-tag">VID</span>`;
+                }
+                historyGrid.appendChild(h);
+            });
+        }
+
+        function showLoading(label) {
+            outputCard.innerHTML = `
+                <div class="placeholder-text">
+                    <div class="placeholder-icon">🎨</div>
+                    <div style="color:var(--primary); font-weight:800; font-size:16px;">AI is crafting your creation...</div>
+                    <div class="progress-wrap">
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="pbar"></div>
+                        </div>
+                        <div class="progress-label" id="plabel">${label}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =============================================
+        // API CALLS
+        // =============================================
+        async function generateImage(prompt) {
+            const size = aspectRatio.value;
+            const style = qualityPreset.value;
+            const fullPrompt = prompt + style;
+
+            const resp = await fetch(`${BASE_URL}/images/generations`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${API_KEY}`
+                },
+                body: JSON.stringify({
+                    model: "cogview-3-flash",
+                    prompt: fullPrompt,
+                    n: 1,
+                    size: size
+                })
+            });
+            if (!resp.ok) throw new Error(`API Error (${resp.status}): ${await resp.text()}`);
+            const data = await resp.json();
+            return data.data[0].url;
+        }
+
+        async function generateVideo(prompt) {
+            const style = qualityPreset.value;
+            const fullPrompt = prompt + style;
+
+            const submitResp = await fetch(`${BASE_URL}/video/generations`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${API_KEY}`
+                },
+                body: JSON.stringify({
+                    model: "cogvideox-flash",
+                    prompt: fullPrompt,
+                    resolution: "720p",
+                    duration: 5
+                })
+            });
+            if (!submitResp.ok) throw new Error(`Video Submit Error: ${await submitResp.text()}`);
+            const submitData = await submitResp.json();
+            const taskId = submitData.id;
+
+            const startTime = Date.now();
+            for (let i = 1; i <= 60; i++) {
+                await new Promise(r => setTimeout(r, 3000));
+                const elapsed = Math.round((Date.now() - startTime) / 1000);
+                const pct = Math.min(10 + Math.round((elapsed / 45) * 80), 92);
+                
+                const pbar = document.getElementById('pbar');
+                const plabel = document.getElementById('plabel');
+                if (pbar) pbar.style.width = pct + '%';
+                if (plabel) plabel.textContent = `Rendering on Cloud... (${elapsed}s)`;
+                setStatus(`⏳ Generating 720p HD Video on Cloud... (${elapsed}s)`, 'loading');
+
+                const sr = await fetch(`${BASE_URL}/video/generations/${taskId}`, {
+                    headers: { 'Authorization': `Bearer ${API_KEY}` }
+                });
+                if (!sr.ok) continue;
+
+                const sd = await sr.json();
+
+                if (sd.task_status === 'SUCCESS' || sd.status === 'completed') {
+                    const videoUrl = sd.video_result?.[0]?.url || sd.video_url || sd.url;
+                    if (videoUrl) return videoUrl;
+                }
+
+                if (sd.task_status === 'FAIL' || sd.task_status === 'FAILED' || sd.status === 'failed') {
+                    throw new Error(`Video failed: ${sd.error || 'Server error'}`);
+                }
+            }
+            throw new Error('Video generation timed out after 3 minutes');
+        }
+
+        // =============================================
+        // MAIN ACTION
+        // =============================================
+        async function handleGenerate() {
+            const prompt = promptInput.value.trim();
+            if (!prompt) return setStatus('❗ Please enter a prompt description', 'error');
+
+            generateBtn.disabled = true;
+            btnText.textContent = '⏳ Processing...';
+            setStatus('⏳ Sending request to AI Cloud...', 'loading');
+
+            const startTime = Date.now();
+
+            if (currentMode === 'image') {
+                showLoading('Rendering HD Image (~2s)...');
+            } else {
+                showLoading('Submitting Video Task to Cloud...');
+            }
+
+            try {
+                if (currentMode === 'image') {
+                    const imageUrl = await generateImage(prompt);
+                    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+                    showResult(imageUrl, 'image', prompt);
+                    setStatus(`🎉 HD Image generated successfully in ${elapsed}s!`, 'success');
+                } else {
+                    const videoUrl = await generateVideo(prompt);
+                    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+                    showResult(videoUrl, 'video', prompt);
+                    setStatus(`🎉 720p Cinematic Video generated successfully in ${elapsed}s!`, 'success');
+                }
+            } catch (err) {
+                console.error(err);
+                setStatus(`❌ ${err.message}`, 'error');
+                outputCard.innerHTML = `
+                    <div class="placeholder-text" style="color:var(--error);">
+                        <div class="placeholder-icon">⚠️</div>
+                        <div style="font-weight:700;">Generation Failed</div>
+                        <div style="font-size:13px; max-width:400px; color:var(--text-muted);">${err.message}</div>
+                    </div>
+                `;
+            } finally {
+                generateBtn.disabled = false;
+                setMode(currentMode);
+            }
+        }
+    </script>
+</body>
+</html>
