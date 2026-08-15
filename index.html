@@ -536,7 +536,7 @@
             <div class="placeholder-text" id="placeholder">
                 <div class="placeholder-icon">✨</div>
                 <div>Your generated creation will appear here</div>
-                <div style="font-size:13px; color:#94a3b8; margin-top:4px;">Image takes ~2s · Video takes ~35s (100% Free &amp; Unlimited)</div>
+                <div style="font-size:13px; color:#94a3b8; margin-top:4px;">Image takes ~2s · Video takes ~45-90s (100% Free &amp; Unlimited)</div>
             </div>
         </div>
 
@@ -640,7 +640,7 @@
                 tabImage.classList.remove('active');
                 aspectRatioGroup.style.display = 'none';
                 videoResGroup.style.display = 'block';
-                btnText.textContent = '🎬 Generate HD Video (~35s)';
+                btnText.textContent = '🎬 Generate HD Video (~45s)';
             }
         }
 
@@ -819,28 +819,30 @@
             });
             if (!submitResp.ok) throw new Error(`Video Submit Error: ${await submitResp.text()}`);
             const submitData = await submitResp.json();
-            const taskId = submitData.id || submitData.task_id;
+            const taskId = submitData.id || submitData.task_id || submitData.video_id;
 
             const startTime = Date.now();
-            for (let i = 1; i <= 60; i++) {
-                await new Promise(r => setTimeout(r, 4000));
+            for (let i = 1; i <= 90; i++) {
+                await new Promise(r => setTimeout(r, 3000));
                 const elapsed = Math.round((Date.now() - startTime) / 1000);
                 
+                // Continuous smooth visual progress bar
+                const currentPct = Math.min(10 + Math.round((elapsed / 65) * 85), 96);
+                const pbar = document.getElementById('pbar');
+                const plabel = document.getElementById('plabel');
+                if (pbar) pbar.style.width = currentPct + '%';
+                if (plabel) plabel.textContent = `Rendering on Cloud Cluster... ${currentPct}% (${elapsed}s)`;
+                setStatus(`⏳ Generating HD Video on Cloud Cluster... (${elapsed}s)`, 'loading');
+
                 const sr = await fetch(`${BASE_URL}/videos/${taskId}`, {
                     headers: { 'Authorization': `Bearer ${API_KEY}` }
                 });
                 if (!sr.ok) continue;
 
                 const sd = await sr.json();
-                const prog = sd.progress || Math.min(10 + Math.round((elapsed / 40) * 85), 95);
 
-                const pbar = document.getElementById('pbar');
-                const plabel = document.getElementById('plabel');
-                if (pbar) pbar.style.width = prog + '%';
-                if (plabel) plabel.textContent = `Rendering on Cloud... ${prog}% (${elapsed}s)`;
-                setStatus(`⏳ Generating HD Video on Cloud Cluster... (${elapsed}s)`, 'loading');
-
-                if (sd.status === 'completed') {
+                if (sd.status === 'completed' || sd.progress === 100) {
+                    if (pbar) pbar.style.width = '100%';
                     const videoUrl = sd.metadata?.url || sd.video_url || sd.url || sd.output_url;
                     if (videoUrl) return videoUrl;
                 }
