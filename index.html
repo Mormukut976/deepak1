@@ -294,7 +294,7 @@
             transform: translateY(-1px);
         }
 
-        .options-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
 
         .btn-generate {
             width: 100%;
@@ -423,7 +423,7 @@
             border-radius: 4px;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 680px) {
             .studio-container { padding: 24px 18px; }
             .options-grid { grid-template-columns: 1fr; }
             .brand-text h1 { font-size: 20px; }
@@ -459,7 +459,7 @@
                 <div class="brand-icon">✦</div>
                 <div class="brand-text">
                     <h1>Agnes AI Studio</h1>
-                    <p>Enterprise High-Speed Image &amp; Video Engine</p>
+                    <p>Unlimited High-Speed Image &amp; Video Engine</p>
                 </div>
             </div>
             <div class="user-pill">
@@ -476,7 +476,7 @@
                 <span>🖼️</span> HD Image Generator (2s)
             </button>
             <button class="tab-btn" id="tabVideo" onclick="setMode('video')">
-                <span>🎬</span> Cinematic Video Generator (720p)
+                <span>🎬</span> Cinematic Video Generator (Unlimited)
             </button>
         </div>
 
@@ -507,17 +507,11 @@
             </div>
 
             <div class="form-group" id="videoResGroup" style="display:none;">
-                <label for="videoResolution">📐 Video Resolution</label>
+                <label for="videoResolution">📐 Video Aspect &amp; Resolution</label>
                 <select id="videoResolution">
-                    <option value="720p">720p HD (High-Speed Cinematic)</option>
-                </select>
-            </div>
-
-            <div class="form-group" id="videoDurationGroup" style="display:none;">
-                <label for="videoDuration">⏱️ Video Duration</label>
-                <select id="videoDuration">
-                    <option value="5" selected>5 Seconds (Standard · Crisp Motion)</option>
-                    <option value="10">10 Seconds (Extended Mode)</option>
+                    <option value="1152x768">1152×768 (Cinematic Widescreen HD)</option>
+                    <option value="768x768" selected>768×768 (Square HD)</option>
+                    <option value="1024x576">1024×576 (Standard 16:9)</option>
                 </select>
             </div>
 
@@ -542,7 +536,7 @@
             <div class="placeholder-text" id="placeholder">
                 <div class="placeholder-icon">✨</div>
                 <div>Your generated creation will appear here</div>
-                <div style="font-size:13px; color:#94a3b8; margin-top:4px;">Image takes ~2s · Video takes ~35s</div>
+                <div style="font-size:13px; color:#94a3b8; margin-top:4px;">Image takes ~2s · Video takes ~35s (100% Free &amp; Unlimited)</div>
             </div>
         </div>
 
@@ -559,8 +553,9 @@
         const AUTH_USER = "Deepak";
         const AUTH_PASS = "Deepak8890@";
 
-        const API_KEY  = "nvai-b34d22708e3b2941fc9cc7b9835b05e3d80cc3cbb7a568e5";
-        const BASE_URL = "https://aiapi-pro.com/v1";
+        // Agnes AI Free & Unlimited Engine
+        const API_KEY  = "sk-LXYabeboAhpqdaSX3hEuzMp2EKQm4fPDnUlHPN6S568diaz7";
+        const BASE_URL = "https://apihub.agnes-ai.com/v1";
 
         let currentMode = 'image';
         const historyItems = [];
@@ -581,8 +576,7 @@
         const tabVideo        = document.getElementById('tabVideo');
         const aspectRatioGroup= document.getElementById('aspectRatioGroup');
         const videoResGroup   = document.getElementById('videoResGroup');
-        const videoDurationGroup = document.getElementById('videoDurationGroup');
-        const videoDuration   = document.getElementById('videoDuration');
+        const videoResolution = document.getElementById('videoResolution');
         const aspectRatio     = document.getElementById('aspectRatio');
         const qualityPreset   = document.getElementById('qualityPreset');
         const historySection  = document.getElementById('historySection');
@@ -640,15 +634,13 @@
                 tabVideo.classList.remove('active');
                 aspectRatioGroup.style.display = 'block';
                 videoResGroup.style.display = 'none';
-                videoDurationGroup.style.display = 'none';
                 btnText.textContent = '🚀 Generate HD Image (2s)';
             } else {
                 tabVideo.classList.add('active');
                 tabImage.classList.remove('active');
                 aspectRatioGroup.style.display = 'none';
                 videoResGroup.style.display = 'block';
-                videoDurationGroup.style.display = 'block';
-                btnText.textContent = '🎬 Generate 720p Video (~35s)';
+                btnText.textContent = '🎬 Generate HD Video (~35s)';
             }
         }
 
@@ -786,7 +778,6 @@
         }
 
         async function generateImage(prompt) {
-            const size = aspectRatio.value;
             const style = qualityPreset.value;
             const fullPrompt = prompt + style;
 
@@ -797,10 +788,10 @@
                     'Authorization': `Bearer ${API_KEY}`
                 },
                 body: JSON.stringify({
-                    model: "cogview-3-flash",
+                    model: "agnes-image-2.1-flash",
                     prompt: fullPrompt,
                     n: 1,
-                    size: size
+                    size: "1024x1024"
                 })
             });
             if (!resp.ok) throw new Error(`API Error (${resp.status}): ${await resp.text()}`);
@@ -811,54 +802,54 @@
         async function generateVideo(prompt) {
             const style = qualityPreset.value;
             const fullPrompt = prompt + style;
-            const dur = parseInt(videoDuration.value) || 5;
+            const [width, height] = videoResolution.value.split('x').map(Number);
 
-            const submitResp = await fetch(`${BASE_URL}/video/generations`, {
+            const submitResp = await fetch(`${BASE_URL}/videos`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${API_KEY}`
                 },
                 body: JSON.stringify({
-                    model: "cogvideox-flash",
+                    model: "agnes-video-v2.0",
                     prompt: fullPrompt,
-                    resolution: "720p",
-                    duration: dur
+                    width: width,
+                    height: height
                 })
             });
             if (!submitResp.ok) throw new Error(`Video Submit Error: ${await submitResp.text()}`);
             const submitData = await submitResp.json();
-            const taskId = submitData.id;
+            const taskId = submitData.id || submitData.task_id;
 
             const startTime = Date.now();
             for (let i = 1; i <= 60; i++) {
-                await new Promise(r => setTimeout(r, 3000));
+                await new Promise(r => setTimeout(r, 4000));
                 const elapsed = Math.round((Date.now() - startTime) / 1000);
-                const pct = Math.min(10 + Math.round((elapsed / 45) * 80), 92);
                 
-                const pbar = document.getElementById('pbar');
-                const plabel = document.getElementById('plabel');
-                if (pbar) pbar.style.width = pct + '%';
-                if (plabel) plabel.textContent = `Rendering on Cloud... (${elapsed}s)`;
-                setStatus(`⏳ Generating 720p HD Video on Cloud... (${elapsed}s)`, 'loading');
-
-                const sr = await fetch(`${BASE_URL}/video/generations/${taskId}`, {
+                const sr = await fetch(`${BASE_URL}/videos/${taskId}`, {
                     headers: { 'Authorization': `Bearer ${API_KEY}` }
                 });
                 if (!sr.ok) continue;
 
                 const sd = await sr.json();
+                const prog = sd.progress || Math.min(10 + Math.round((elapsed / 40) * 85), 95);
 
-                if (sd.task_status === 'SUCCESS' || sd.status === 'completed') {
-                    const videoUrl = sd.video_result?.[0]?.url || sd.video_url || sd.url;
+                const pbar = document.getElementById('pbar');
+                const plabel = document.getElementById('plabel');
+                if (pbar) pbar.style.width = prog + '%';
+                if (plabel) plabel.textContent = `Rendering on Cloud... ${prog}% (${elapsed}s)`;
+                setStatus(`⏳ Generating HD Video on Cloud Cluster... (${elapsed}s)`, 'loading');
+
+                if (sd.status === 'completed') {
+                    const videoUrl = sd.metadata?.url || sd.video_url || sd.url || sd.output_url;
                     if (videoUrl) return videoUrl;
                 }
 
-                if (sd.task_status === 'FAIL' || sd.task_status === 'FAILED' || sd.status === 'failed') {
-                    throw new Error(`Video failed: ${sd.error || 'Server error'}`);
+                if (sd.status === 'failed') {
+                    throw new Error(`Video failed: ${sd.error || 'Server render error'}`);
                 }
             }
-            throw new Error('Video generation timed out after 3 minutes');
+            throw new Error('Video generation timed out after 4 minutes');
         }
 
         async function handleGenerate() {
@@ -887,7 +878,7 @@
                     const videoUrl = await generateVideo(prompt);
                     const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
                     showResult(videoUrl, 'video', prompt);
-                    setStatus(`🎉 720p Cinematic Video generated successfully in ${elapsed}s!`, 'success');
+                    setStatus(`🎉 Cinematic HD Video generated successfully in ${elapsed}s!`, 'success');
                 }
             } catch (err) {
                 console.error(err);
